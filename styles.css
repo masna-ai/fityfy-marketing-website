@@ -1,12 +1,117 @@
 /* Modern, clean styles for Fityfy landing page */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+  --primary: #6366F1;
+  --secondary: #8B5CF6;
+  --dark: #222;
+  --light: #f5f8fa;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Global alignment & spacing enhancements */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+section > h2 {
+  text-align: center;
+  margin: 0 0 32px 0;
+  color: var(--primary);
+  font-size: 2rem;
+}
+
+section p {
+  line-height: 1.6;
+}
+
+.testimonial {
+  text-align: center;
+}
+
+/* --- Revamp overrides & interactive effects --- */
+header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  padding: 80px 0 60px 0;
+}
+
+.cta-btn {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: var(--shadow);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.cta-btn:hover {
+  background: var(--secondary);
+  transform: translateY(-3px);
+}
+
+.feature {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.screenshot {
+  border-radius: var(--radius-lg);
+}
+
+/* --- Download badge enhancements --- */
+.ios-quote {
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
+  color: var(--dark);
+  font-weight: 600;
+  margin: 40px auto;
+  max-width: 500px;
+  text-align: center;
+}
+
+.download-link {
+  display: inline-flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.app-store-badge {
+  height: 60px;
+  max-width: 220px;
+  box-shadow: none;
+  transition: transform 0.25s ease;
+}
+
+.download-link:hover .app-store-badge {
+  transform: scale(1.08);
+}
+
+footer {
+  background: var(--dark);
+  color: #fff;
+}
+
 body {
   margin: 0;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: #f5f8fa;
-  color: #222;
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+  background: var(--light);
+  color: var(--dark);
+  scroll-behavior: smooth;
 }
 header {
-  background: linear-gradient(90deg, #2dc997, #00bcd4);
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
   color: #fff;
   padding: 60px 0 40px 0;
   text-align: center;
@@ -21,7 +126,7 @@ header p {
 }
 .cta-btn {
   background: #fff;
-  color: #2dc997;
+  color: var(--primary);
   border: none;
   border-radius: 25px;
   padding: 14px 36px;
@@ -31,23 +136,8 @@ header p {
   transition: background 0.2s, color 0.2s;
 }
 .cta-btn:hover {
-  background: #2dc997;
+  background: var(--primary);
   color: #fff;
-}
-.ios-quote {
-  margin: 24px auto 0 auto;
-  padding: 18px 24px;
-  background: #e0f7fa;
-  color: #00796b;
-  border-radius: 14px;
-  max-width: 420px;
-  text-align: center;
-  font-size: 1.18rem;
-  box-shadow: 0 2px 8px rgba(0,188,212,0.09);
-}
-.ios-quote q {
-  font-style: italic;
-  font-size: 1.1em;
 }
 .download-link {
   display: inline-block;
@@ -85,16 +175,16 @@ header p {
   text-align: center;
 }
 .journey h2 {
-  color: #2dc997;
+  color: var(--primary);
   margin-bottom: 12px;
 }
 .journey blockquote {
   font-size: 1.17rem;
-  color: #00bcd4;
+  color: var(--secondary);
   margin: 22px auto;
   padding: 0 16px;
   font-style: italic;
-  border-left: 4px solid #2dc997;
+  border-left: 4px solid var(--primary);
   background: #f5f8fa;
   border-radius: 8px;
   display: inline-block;
@@ -127,9 +217,43 @@ section {
   justify-content: center;
   flex-wrap: wrap;
 }
+@media (max-width: 700px) {
+  .screenshots {
+    gap: 20px;
+    margin: 0 auto 28px auto;
+    width: 100%;
+  overflow-x: hidden;
+    padding: 0;
+    justify-content: center;
+  }
+  .screenshot {
+    width: 92vw;
+    max-width: 440px;
+    min-width: 240px;
+    aspect-ratio: 9/19;
+    height: auto;
+    margin: 0 auto 12px auto;
+    background: #e0f7fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0,188,212,0.11);
+    overflow: hidden;
+  }
+  .screenshot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(44, 201, 151, 0.12);
+    display: block;
+    margin: 0 auto;
+  }
+}
 .screenshot {
-  width: 210px;
-  height: 380px;
+  width: 260px;
+  height: 470px;
   background: #e0f7fa;
   border-radius: 18px;
   box-shadow: 0 2px 8px rgba(0,188,212,0.11);
@@ -137,7 +261,7 @@ section {
   align-items: center;
   justify-content: center;
   font-size: 1.1rem;
-  color: #00bcd4;
+  color: var(--secondary);
   overflow: hidden;
 }
 .screenshot img {
