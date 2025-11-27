@@ -1,77 +1,389 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fityfy AI – Your Fitness, Simplified</title>
-  <meta name="description" content="Fityfy AI: The ultimate app to simplify your fitness journey. Track, train, and transform with ease!">
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fityfy - Wellness Reimagined</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- React and ReactDOM -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.20.12/babel.min.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0F392B', // Deep Forest Green
+                        secondary: '#E8F5E9', // Soft Sage
+                        accent: '#D4E157', // Muted Lime
+                        surface: '#F9FAFB', // Off-white
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F9FAFB;
+            color: #1F2937;
+        }
+
+        .hero-pattern {
+            background-color: #E8F5E9;
+            background-image: radial-gradient(#0F392B 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            opacity: 0.5;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .phone-frame {
+            border: 12px solid #1F2937;
+            border-radius: 40px;
+            overflow: hidden;
+            position: relative;
+            background: #000;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+    </style>
 </head>
-<body>
-  <header>
-    <h1>Fityfy AI</h1>
-    <p>Transform your health, regain your confidence, and become the best version of yourself—one step at a time.</p>
-    <button class="cta-btn" id="cta-btn">Get Started</button>
-  </header>
 
-  <section class="journey" id="journey">
-    <h2>Your Journey Matters</h2>
-    <p>
-      At Fityfy AI, we understand that weight loss and healthy living aren’t just about numbers—they’re about how you feel every day. Whether you’re starting out, overcoming setbacks, or striving for new goals, we’re here to support you.
-    </p>
-    <blockquote>
-      "It's not about being perfect. It's about making progress, feeling stronger, and loving yourself along the way."
-    </blockquote>
-    <p>
-      Join a community that celebrates every victory—big or small. Let’s make health a joyful journey, together.
-    </p>
-  </section>
+<body class="antialiased overflow-x-hidden">
 
-  <section id="features">
-    <h2>Why Fityfy AI?</h2>
-    <div class="features">
-      <div class="feature">
-        <h3>AI Nutrition Analysis</h3>
-        <p>Instantly analyze your meals and get smart, actionable nutrition feedback powered by AI.</p>
-      </div>
-      <div class="feature">
-        <h3>Advanced Analytics</h3>
-        <p>Track your health data with detailed graphs, trends, and insights for smarter fitness decisions.</p>
-      </div>
-      <div class="feature">
-        <h3>AI Expert Dietician</h3>
-        <p>Chat with your personal AI dietician and receive weekly analysis and tailored recommendations.</p>
-      </div>
-    </div>
-  </section>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div
+                    class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-serif font-bold text-xl">
+                    F</div>
+                <span class="font-serif text-2xl font-bold text-primary tracking-tight">Fityfy</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
+                <a href="#" class="hover:text-primary transition-colors">Features</a>
+                <a href="#" class="hover:text-primary transition-colors">Success Stories</a>
+                <a href="#" class="hover:text-primary transition-colors">About</a>
+            </div>
+            <button
+                class="bg-primary text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+                Get Started
+            </button>
+        </div>
+    </nav>
 
-  <section>
-    <h2>Sneak Peek</h2>
-    <div class="screenshots">
-      <div class="screenshot"><img src="screen-1.PNG" alt="Fityfy App Screenshot 1"></div>
-      <div class="screenshot"><img src="screen-2.PNG" alt="Fityfy App Screenshot 2"></div>
-      <div class="screenshot"><img src="screen-3.PNG" alt="Fityfy App Screenshot 3"></div>
-    </div>
-  </section>
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 left-0 w-full h-full hero-pattern -z-20"></div>
+        <div class="blob bg-green-200 w-96 h-96 rounded-full top-0 left-0 -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="blob bg-yellow-100 w-96 h-96 rounded-full bottom-0 right-0 translate-x-1/3 translate-y-1/3"></div>
 
-  <section>
-    <h2>What Users Say</h2>
-    <div class="testimonials">
-      <div class="testimonial">“Fityfy made fitness fun and easy for me!”<br><b>- Alex</b></div>
-      <div class="testimonial">“Love the personalized plans. Highly recommend!”<br><b>- Priya</b></div>
-      <div class="testimonial">“The community keeps me motivated every day.”<br><b>- Sam</b></div>
-    </div>
-  </section>
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8 max-w-2xl">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-green-100 shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                        <span class="text-sm font-medium text-gray-600">AI-Powered Nutrition Assistant</span>
+                    </div>
 
-  <div class="ios-quote">
-    <a class="download-link" href="https://apps.apple.com/app/idXXXXXXXXX" target="_blank" rel="noopener">
-      <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" class="app-store-badge">
-    </a>
-  </div>
-  <footer>
-    &copy; 2025 Fityfy AI. All rights reserved.
-  </footer>
+                    <h1 class="font-serif text-5xl lg:text-7xl font-bold text-gray-900 leading-[1.1]">
+                        Nutrition made <br>
+                        <span class="text-primary italic">effortless.</span>
+                    </h1>
 
-  <script src="script.js"></script>
+                    <p class="text-xl text-gray-600 leading-relaxed max-w-lg">
+                        Your personal AI nutritionist. Track meals with a photo, get instant analysis, and achieve your
+                        wellness goals with elegance.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#"
+                            class="inline-flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-full font-medium text-lg hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 hover:-translate-y-1">
+                            <i data-lucide="apple" class="w-5 h-5"></i>
+                            Download App
+                        </a>
+                        <a href="#"
+                            class="inline-flex items-center justify-center gap-2 bg-white text-gray-800 px-8 py-4 rounded-full font-medium text-lg border border-gray-200 hover:bg-gray-50 transition-all hover:-translate-y-1">
+                            <i data-lucide="play-circle" class="w-5 h-5"></i>
+                            Watch Demo
+                        </a>
+                    </div>
+
+                    <div class="flex items-center gap-4 pt-4">
+                        <div class="flex -space-x-3">
+                            <img src="https://i.pravatar.cc/100?img=1"
+                                class="w-10 h-10 rounded-full border-2 border-white" alt="User">
+                            <img src="https://i.pravatar.cc/100?img=5"
+                                class="w-10 h-10 rounded-full border-2 border-white" alt="User">
+                            <img src="https://i.pravatar.cc/100?img=8"
+                                class="w-10 h-10 rounded-full border-2 border-white" alt="User">
+                        </div>
+                        <div class="text-sm">
+                            <span class="font-bold text-gray-900">4.9/5</span>
+                            <span class="text-gray-500">from 10k+ users</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- React Slider Container -->
+                <div class="relative lg:h-[600px] flex items-center justify-center">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-green-100 to-transparent rounded-full filter blur-3xl opacity-50">
+                    </div>
+                    <div id="app-screenshots" class="relative z-10 animate-float"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="font-serif text-4xl font-bold text-gray-900 mb-4">Holistic Wellness Features</h2>
+                <p class="text-gray-600 text-lg">Everything you need to understand your nutrition and build healthy
+                    habits that last.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div
+                    class="group p-8 rounded-3xl bg-surface border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                    <div
+                        class="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="scan-line" class="w-7 h-7 text-primary"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-gray-900 mb-3">Snap & Track</h3>
+                    <p class="text-gray-600 leading-relaxed">Simply take a photo of your meal. Our AI instantly
+                        identifies ingredients and calculates nutritional values.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div
+                    class="group p-8 rounded-3xl bg-surface border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                    <div
+                        class="w-14 h-14 bg-yellow-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="brain-circuit" class="w-7 h-7 text-yellow-700"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-gray-900 mb-3">Smart Insights</h3>
+                    <p class="text-gray-600 leading-relaxed">Get personalized recommendations based on your goals,
+                        dietary preferences, and eating history.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div
+                    class="group p-8 rounded-3xl bg-surface border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                    <div
+                        class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="activity" class="w-7 h-7 text-blue-700"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-gray-900 mb-3">Health Sync</h3>
+                    <p class="text-gray-600 leading-relaxed">Seamlessly integrates with Apple Health and Google Fit to
+                        correlate nutrition with activity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-primary"></div>
+        <div class="absolute inset-0 opacity-20"
+            style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');">
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-6">Start your transformation today</h2>
+            <p class="text-green-100 text-lg mb-10 max-w-2xl mx-auto">Join thousands of users who have revolutionized
+                their relationship with food using Fityfy.</p>
+            <button
+                class="bg-white text-primary px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all shadow-2xl hover:scale-105">
+                Get Fityfy Free
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-50 pt-20 pb-10 border-t border-gray-200">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-2 mb-6">
+                        <div
+                            class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-serif font-bold text-xl">
+                            F</div>
+                        <span class="font-serif text-2xl font-bold text-primary tracking-tight">Fityfy</span>
+                    </div>
+                    <p class="text-gray-500 max-w-sm">Empowering you to live a healthier, happier life through
+                        intelligent nutrition tracking and personalized guidance.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-6">Product</h4>
+                    <ul class="space-y-4 text-gray-600">
+                        <li><a href="#" class="hover:text-primary">Features</a></li>
+                        <li><a href="#" class="hover:text-primary">Pricing</a></li>
+                        <li><a href="#" class="hover:text-primary">Testimonials</a></li>
+                        <li><a href="#" class="hover:text-primary">API</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-6">Company</h4>
+                    <ul class="space-y-4 text-gray-600">
+                        <li><a href="#" class="hover:text-primary">About Us</a></li>
+                        <li><a href="#" class="hover:text-primary">Careers</a></li>
+                        <li><a href="#" class="hover:text-primary">Blog</a></li>
+                        <li><a href="#" class="hover:text-primary">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">© 2024 Fityfy Inc. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="text-gray-400 hover:text-primary"><i data-lucide="twitter"
+                            class="w-5 h-5"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-primary"><i data-lucide="instagram"
+                            class="w-5 h-5"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-primary"><i data-lucide="linkedin"
+                            class="w-5 h-5"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+
+    <!-- React Image Slider -->
+    <script type="text/babel">
+        const ImageSlider = () => {
+            const [currentIndex, setCurrentIndex] = React.useState(0);
+
+            const images = [
+                "pic1.jpg",
+                "pic2.jpg",
+                "pic3.jpg",
+                "pic4.jpg",
+            ];
+
+            const nextSlide = () => {
+                setCurrentIndex((prevIndex) =>
+                    prevIndex === images.length - 1 ? 0 : prevIndex + 1
+                );
+            };
+
+            const prevSlide = () => {
+                setCurrentIndex((prevIndex) =>
+                    prevIndex === 0 ? images.length - 1 : prevIndex - 1
+                );
+            };
+
+            React.useEffect(() => {
+                const timer = setInterval(nextSlide, 4000);
+                return () => clearInterval(timer);
+            }, []);
+
+            return (
+                <div className="w-[280px] sm:w-[320px] mx-auto">
+                    <div className="phone-frame aspect-[9/19] relative">
+                        {/* Notch */}
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-6 bg-gray-900 rounded-b-2xl z-20"></div>
+
+                        {/* Screen Content */}
+                        <div className="w-full h-full bg-white relative overflow-hidden">
+                            <div
+                                className="flex h-full transition-transform duration-700 ease-in-out"
+                                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                            >
+                                {images.map((src, index) => (
+                                    <div key={index} className="w-full h-full flex-shrink-0 relative">
+                                        <img
+                                            src={src}
+                                            alt={`Fityfy App Screen ${index + 1}`}
+                                            className="w-full h-full object-cover"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Overlay UI Elements to make it look like an app */}
+                            <div className="absolute bottom-8 left-0 right-0 px-6 text-white z-10">
+                                <div className="flex gap-1 mb-2">
+                                    {images.map((_, idx) => (
+                                        <div
+                                            key={idx}
+                                            className={`h-1 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-6 bg-white' : 'w-2 bg-white/40'}`}
+                                        ></div>
+                                    ))}
+                                </div>
+                                <h3 className="font-bold text-lg leading-tight">Smart Nutrition Tracking</h3>
+                                <p className="text-xs text-white/80 mt-1">AI-powered analysis in seconds</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(
+            <ImageSlider />,
+            document.getElementById('app-screenshots')
+        );
+    </script>
 </body>
+
 </html>
